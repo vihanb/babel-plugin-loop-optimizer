@@ -8,6 +8,7 @@ export default function (babel) {
   const { types: t } = babel;
   
   return {
+    name: "ast-transform", // not required
     visitor: {
       CallExpression(path) {
         var parent = path.getStatementParent();
@@ -32,6 +33,16 @@ export default function (babel) {
               arrayName
             ]
           );
+          
+          var resArray = name === "forEach" ? [] : [t.variableDeclaration(
+            "var",
+            [
+              t.variableDeclarator(
+                resArrName,
+                t.arrayExpression()
+              )
+            ]
+          )];
           
           var expr = t.callExpression(
             t.memberExpression(
@@ -66,15 +77,7 @@ export default function (babel) {
               ]
             ),
             
-            t.variableDeclaration(
-              "var",
-              [
-                t.variableDeclarator(
-                  resArrName,
-                  t.arrayExpression()
-                )
-              ]
-            ),
+            ...resArray,
             
             t.forStatement(
               t.variableDeclaration(
@@ -104,7 +107,7 @@ export default function (babel) {
             )
           ]);
           
-          path.replaceWith(resArrName);
+          path.replaceWith(name === "forEach" ? t.identifier("undefined") : resArrName);
         }
       }
     }
