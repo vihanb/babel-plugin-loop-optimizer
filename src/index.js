@@ -1,3 +1,4 @@
+
 const FUNCS = ["map", "forEach"];
 
 function checkName(path) {
@@ -46,11 +47,7 @@ export default function (babel) {
           
           var expr = t.callExpression(
             t.memberExpression(
-              t.memberExpression(
-                arrayName,
-              	iterator,
-              	true
-              ),
+              resArrName,
               t.identifier("push")
             ),
             [ call ]

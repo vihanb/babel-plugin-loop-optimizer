@@ -1,6 +1,6 @@
 {
   "name": "babel-plugin-loop-optimizer",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "Optimizes statements such as `forEach` and `map` to for loops.",
   "main": "lib/index.js",
   "scripts": {
