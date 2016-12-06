@@ -1,4 +1,3 @@
-
 const FUNCS = ["map", "forEach"];
 
 function checkName(path) {
@@ -11,6 +10,30 @@ export default function (babel) {
   return {
     name: "ast-transform", // not required
     visitor: {
+      IfStatement(path) {
+        if (!t.isBlockStatement(path.node.consequent)) {
+          path.node.consequent = t.blockStatement([ path.node.consequent ]);
+        }
+      },
+      
+      ForStatement(path) {
+        if (!t.isBlockStatement(path.node.body)) {
+          path.node.body = t.blockStatement([ path.node.body ]);
+        }
+      },
+      
+      WhileStatement(path) {
+        if (!t.isBlockStatement(path.node.body)) {
+          path.node.body = t.blockStatement([ path.node.body ]);
+        }
+      },
+      
+      ArrowFunctionExpression(path) {
+        if (!t.isBlockStatement(path.node.body)) {
+          path.node.body = t.blockStatement([ t.returnStatement(path.node.body) ]);
+        }
+      },
+      
       CallExpression(path) {
         var parent = path.getStatementParent();
         if (checkName(path)) {
@@ -110,4 +133,6 @@ export default function (babel) {
     }
   };
 }
+
+
 
