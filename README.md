@@ -54,7 +54,7 @@ for (var i = 0; i < 5; s.forEach(f)) {
 }
 ```
 
-This is required since it is not possible to determine an object's type at runtime.
+This is required since it is not possible to determine an object's type at compile-time.
 
 ## Example
 
@@ -76,3 +76,7 @@ function timesTwo(arr) {
     return _r;
 }
 ```
+
+---
+
+If you need any other help, don't hesitate to leave an issue
