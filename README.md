@@ -34,6 +34,28 @@ require('babel').transform('code', {
 });
 ```
 
+## Bugs?
+
+Now you may say "wait, wait, wait!" This optimizes on things that aren't just arrays! My `map#forEach` is optimized too! To fix this, add a comment that says `// O: KEEP` right before the line on which you use the `forEach`. Examples:
+
+```
+var m = new Map();
+// O: KEEP
+m.forEach(f)
+```
+
+or:
+
+```
+var s = new Set();
+// O: KEEP
+for (var i = 0; i < 5; s.forEach(f)) {
+    // ...
+}
+```
+
+This is required since it is not possible to determine an object's type at runtime.
+
 ## Example
 
 ```js
