@@ -1,4 +1,4 @@
-# babel-plugin-compile-cheddar
+# babel-plugin-loop-optimizer
 
 Optimizes `.forEach` and `.map` statements to `for` stements
 
