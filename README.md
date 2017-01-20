@@ -71,7 +71,7 @@ function timesTwo(arr) {
     var _r = [];
 
     for (var _i = 0; _i < _a.length; _i++)
-        _a[_i].push(_f(_a[_i], _i, _a));
+        _r.push(_f(_a[_i], _i, _a));
 
     return _r;
 }
