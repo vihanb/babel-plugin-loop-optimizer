@@ -37,6 +37,10 @@ export default function (babel) {
       CallExpression(path) {
         var parent = path.getStatementParent();
 
+        // Don't modify if in ternary
+        let excludeTernary = path.findParent((path) => path.isConditionalExpression());
+        if (excludeTernary) return;
+
         var comments;
         if ((comments = parent.node.leadingComments) && comments[comments.length - 1]
             && /^\s*O:\s*KEEP/.test(comments[comments.length - 1].value)) {
