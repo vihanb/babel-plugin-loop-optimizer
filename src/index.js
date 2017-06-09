@@ -48,7 +48,7 @@ export default function (babel) {
         }
 
 
-        if (checkName(path)) {
+        if (checkName(path) && path.node.arguments.length === 1) {
           var name = path.node.callee.property.name;
           
           var arrayName = path.scope.generateUidIdentifier("a");
