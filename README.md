@@ -1,5 +1,7 @@
 # babel-plugin-loop-optimizer
 
+**WARNING:** This package is **unmaintained**. It probably still works but I am not able to maintain it. If anyone wishes to pick this up leave an issue and I can give access.
+
 Optimizes `.forEach` and `.map` statements to `for` stements
 
 ## Installation
