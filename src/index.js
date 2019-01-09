@@ -323,7 +323,7 @@ function Handle_filter(t, path, aggressive_optimization) {
 					arrayName
 				]
 			),
-			t.callExpression (
+			t.expressionStatement(t.callExpression (
 				t.memberExpression (
 					resArrName,
 					t.identifier("push")
@@ -333,7 +333,7 @@ function Handle_filter(t, path, aggressive_optimization) {
 					iterator,
 					true
 				)]
-			)
+			))
 		)
 
 	path.getStatementParent().insertBefore([
@@ -396,7 +396,8 @@ function Handle_filter(t, path, aggressive_optimization) {
 	path.replaceWith(resArrName)
 }
 
-export default babel => {
+exports.__esModule = true
+exports.default = babel => {
 	const { types: t } = babel
 
 	return {
