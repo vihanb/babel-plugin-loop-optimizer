@@ -396,8 +396,7 @@ function Handle_filter(t, path, aggressive_optimization) {
 	path.replaceWith(resArrName)
 }
 
-exports.__esModule = true
-exports.default = babel => {
+export default babel => {
 	const { types: t } = babel
 
 	return {
