@@ -19,8 +19,8 @@
 	},
 	"homepage": "https://github.com/vihanb/babel-plugin-loop-optimizer#readme",
 	"devDependencies": {
-		"babel": "^6.23.0",
-		"babel-cli": "^6.26.0",
+		"babel": "^6.5.2",
+		"babel-cli": "^6.18.0",
 		"babel-preset-env": "^1.7.0"
 	}
 }
