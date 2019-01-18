@@ -1,5 +1,5 @@
 // NON-RETURNING
-function Handle_forEach(t, path, aggressive_optimization) {
+function Handle_forEach(t, path, aggressive_optimization, possible_undefined) {
 	var arrayName = path.scope.generateUidIdentifier("a"),
 		funcName = path.scope.generateUidIdentifier("f"),
 		iterator = path.scope.generateUidIdentifier("i"),
@@ -41,7 +41,21 @@ function Handle_forEach(t, path, aggressive_optimization) {
 						)
 					)
 				]),
-				t.updateExpression("--", iterator),
+				possible_undefined
+					? t.logicalExpression (
+						"&&",
+						t.updateExpression("--", iterator),
+						t.binaryExpression (
+							"!==",
+							t.memberExpression (
+								arrayName,
+								iterator,
+								true
+							),
+							t.identifier("undefined")
+						)
+					)
+					: t.updateExpression("--", iterator),
 				null,
 				call
 			)
@@ -52,14 +66,28 @@ function Handle_forEach(t, path, aggressive_optimization) {
 						t.numericLiteral(0)
 					)
 				]),
-				t.binaryExpression (
-					"<",
-					iterator,
-					t.memberExpression (
-						arrayName,
-						t.identifier("length")
+				possible_undefined
+					? t.logicalExpression (
+						"&&",
+						t.binaryExpression (
+							"<",
+							iterator,
+							t.memberExpression (
+								arrayName,
+								t.identifier("length")
+							)
+						),
+						t.binaryExpression (
+							"!==",
+							t.memberExpression (
+								arrayName,
+								iterator,
+								true
+							),
+							t.identifier("undefined")
+						)
 					)
-				),
+					: t.updateExpression("--", iterator),
 				t.updateExpression("++", iterator),
 				call
 			)
@@ -68,7 +96,7 @@ function Handle_forEach(t, path, aggressive_optimization) {
 	path.remove()
 }
 
-function Handle_every(t, path, aggressive_optimization) {
+function Handle_every(t, path, aggressive_optimization, possible_undefined) {
 	var arrayName = path.scope.generateUidIdentifier("a"),
 		funcName = path.scope.generateUidIdentifier("f"),
 		iterator = path.scope.generateUidIdentifier("i"),
@@ -114,7 +142,21 @@ function Handle_every(t, path, aggressive_optimization) {
 						)
 					)
 				]),
-				t.updateExpression("--", iterator),
+				possible_undefined
+					? t.logicalExpression (
+						"&&",
+						t.updateExpression("--", iterator),
+						t.binaryExpression (
+							"!==",
+							t.memberExpression (
+								arrayName,
+								iterator,
+								true
+							),
+							t.identifier("undefined")
+						)
+					)
+					: t.updateExpression("--", iterator),
 				null,
 				expr
 			)
@@ -125,14 +167,28 @@ function Handle_every(t, path, aggressive_optimization) {
 						t.numericLiteral(0)
 					)
 				]),
-				t.binaryExpression (
-					"<",
-					iterator,
-					t.memberExpression (
-						arrayName,
-						t.identifier("length")
+				possible_undefined
+					? t.logicalExpression (
+						"&&",
+						t.binaryExpression (
+							"<",
+							iterator,
+							t.memberExpression (
+								arrayName,
+								t.identifier("length")
+							)
+						),
+						t.binaryExpression (
+							"!==",
+							t.memberExpression (
+								arrayName,
+								iterator,
+								true
+							),
+							t.identifier("undefined")
+						)
 					)
-				),
+					: t.updateExpression("--", iterator),
 				t.updateExpression("++", iterator),
 				expr
 			)
@@ -142,7 +198,7 @@ function Handle_every(t, path, aggressive_optimization) {
 }
 
 // RETURNING
-function Handle_find(t, path, aggressive_optimization) {
+function Handle_find(t, path, aggressive_optimization, possible_undefined) {
 	var arrayName = path.scope.generateUidIdentifier("a"),
 		funcName = path.scope.generateUidIdentifier("f"),
 		resName = path.scope.generateUidIdentifier("r"),
@@ -197,7 +253,21 @@ function Handle_find(t, path, aggressive_optimization) {
 						t.identifier("length")
 					)
 				)]),
-				t.updateExpression("--", iterator),
+				possible_undefined
+					? t.logicalExpression (
+						"&&",
+						t.updateExpression("--", iterator),
+						t.binaryExpression (
+							"!==",
+							t.memberExpression (
+								arrayName,
+								iterator,
+								true
+							),
+							t.identifier("undefined")
+						)
+					)
+					: t.updateExpression("--", iterator),
 				null,
 				expr
 			)
@@ -208,14 +278,28 @@ function Handle_find(t, path, aggressive_optimization) {
 						t.numericLiteral(0)
 					)
 				]),
-				t.binaryExpression (
-					"<",
-					iterator,
-					t.memberExpression (
-						arrayName,
-						t.identifier("length")
+				possible_undefined
+					? t.logicalExpression (
+						"&&",
+						t.binaryExpression (
+							"<",
+							iterator,
+							t.memberExpression (
+								arrayName,
+								t.identifier("length")
+							)
+						),
+						t.binaryExpression (
+							"!==",
+							t.memberExpression (
+								arrayName,
+								iterator,
+								true
+							),
+							t.identifier("undefined")
+						)
 					)
-				),
+					: t.updateExpression("--", iterator),
 				t.updateExpression("++", iterator),
 				expr
 			)
@@ -224,7 +308,7 @@ function Handle_find(t, path, aggressive_optimization) {
 	path.replaceWith(resName)
 }
 
-function Handle_map(t, path, aggressive_optimization) {
+function Handle_map(t, path, aggressive_optimization, possible_undefined) {
 	var arrayName = path.scope.generateUidIdentifier("a"),
 		funcName = path.scope.generateUidIdentifier("f"),
 		resArrName = path.scope.generateUidIdentifier("r"),
@@ -278,7 +362,21 @@ function Handle_map(t, path, aggressive_optimization) {
 						)
 					)
 				]),
-				t.updateExpression("--", iterator),
+				possible_undefined
+					? t.logicalExpression (
+						"&&",
+						t.updateExpression("--", iterator),
+						t.binaryExpression (
+							"!==",
+							t.memberExpression (
+								arrayName,
+								iterator,
+								true
+							),
+							t.identifier("undefined")
+						)
+					)
+					: t.updateExpression("--", iterator),
 				null,
 				expr
 			)
@@ -289,14 +387,28 @@ function Handle_map(t, path, aggressive_optimization) {
 						t.numericLiteral(0)
 					)
 				]),
-				t.binaryExpression (
-					"<",
-					iterator,
-					t.memberExpression (
-						arrayName,
-						t.identifier("length")
+				possible_undefined
+					? t.logicalExpression (
+						"&&",
+						t.binaryExpression (
+							"<",
+							iterator,
+							t.memberExpression (
+								arrayName,
+								t.identifier("length")
+							)
+						),
+						t.binaryExpression (
+							"!==",
+							t.memberExpression (
+								arrayName,
+								iterator,
+								true
+							),
+							t.identifier("undefined")
+						)
 					)
-				),
+					: t.updateExpression("--", iterator),
 				t.updateExpression("++", iterator),
 				expr
 			)
@@ -305,7 +417,7 @@ function Handle_map(t, path, aggressive_optimization) {
 	path.replaceWith(resArrName)
 }
 
-function Handle_filter(t, path, aggressive_optimization) {
+function Handle_filter(t, path, aggressive_optimization, possible_undefined) {
 	var arrayName = path.scope.generateUidIdentifier("a"),
 		funcName = path.scope.generateUidIdentifier("f"),
 		resArrName = path.scope.generateUidIdentifier("r"),
@@ -369,7 +481,21 @@ function Handle_filter(t, path, aggressive_optimization) {
 						)
 					)
 				]),
-				t.updateExpression("--", iterator),
+				possible_undefined
+					? t.logicalExpression (
+						"&&",
+						t.updateExpression("--", iterator),
+						t.binaryExpression (
+							"!==",
+							t.memberExpression (
+								arrayName,
+								iterator,
+								true
+							),
+							t.identifier("undefined")
+						)
+					)
+					: t.updateExpression("--", iterator),
 				null,
 				expr
 			)
@@ -380,14 +506,28 @@ function Handle_filter(t, path, aggressive_optimization) {
 						t.numericLiteral(0)
 					)
 				]),
-				t.binaryExpression (
-					"<",
-					iterator,
-					t.memberExpression (
-						arrayName,
-						t.identifier("length")
+				possible_undefined
+					? t.logicalExpression (
+						"&&",
+						t.binaryExpression (
+							"<",
+							iterator,
+							t.memberExpression (
+								arrayName,
+								t.identifier("length")
+							)
+						),
+						t.binaryExpression (
+							"!==",
+							t.memberExpression (
+								arrayName,
+								iterator,
+								true
+							),
+							t.identifier("undefined")
+						)
 					)
-				),
+					: t.updateExpression("--", iterator),
 				t.updateExpression("++", iterator),
 				expr
 			)
@@ -426,14 +566,16 @@ export default babel => {
 				if (path.findParent(path => path.isConditionalExpression()))
 					return
 
-				var aggressive_optimization = true
+				var aggressive_optimization = true,
+					possible_undefined = false
 				{
 					let comments
 					if ((comments = path.getStatementParent().node.leadingComments) && comments[comments.length - 1]) {
 						let comment = comments[comments.length - 1].value
-						if (/^\s*loop-optimizer:\s*KEEP/.test(comment))
+						if (/^\s*loop-optimizer:(\s+)KEEP/.test(comment))
 							return
-						aggressive_optimization = !/^\s*loop-optimizer:\s*FORWARD/.test(comment)
+						aggressive_optimization = !/^\s*loop-optimizer:(.*),?FORWARD/.test(comment)
+						possible_undefined = /^\s*loop-optimizer:(.*),?POSSIBLE_UNDEFINED/.test(comment)
 					}
 				}
 
@@ -441,21 +583,21 @@ export default babel => {
 					switch (path.node.callee.property.name) {
 						// NON-RETURNING
 						case "forEach":
-							Handle_forEach(t, path, aggressive_optimization)
+							Handle_forEach(t, path, aggressive_optimization, possible_undefined)
 							break
 						case "every":
-							Handle_every(t, path, aggressive_optimization)
+							Handle_every(t, path, aggressive_optimization, possible_undefined)
 							break
 
 						// RETURNING
 						case "find":
-							Handle_find(t, path, aggressive_optimization)
+							Handle_find(t, path, aggressive_optimization, possible_undefined)
 							break
 						case "map":
-							Handle_map(t, path, aggressive_optimization)
+							Handle_map(t, path, aggressive_optimization, possible_undefined)
 							break
 						case "filter":
-							Handle_filter(t, path, aggressive_optimization)
+							Handle_filter(t, path, aggressive_optimization, possible_undefined)
 							break
 					}
 			}
