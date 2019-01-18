@@ -1,11 +1,11 @@
 {
   console.log("FORWARD");
-  let ar = [1, 2, 3]; // loop-optimizer: FORWARD
+  let ar = [1, 2, 3]; // loop-optimizer: FORWARD, POSSIBLE_UNDEFINED
 
   let _a = ar;
   let _f = console.log;
 
-  for (let _i = 0; _i < _a.length; _i++) {
+  for (let _i = 0; _i < _a.length && _a[_i] !== undefined; _i++) {
     _f(_a[_i], _i, _a);
   }
 }
