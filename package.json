@@ -1,25 +1,27 @@
 {
-  "name": "babel-plugin-loop-optimizer",
-  "version": "1.4.1",
-  "description": "Optimizes statements such as `forEach` and `map` to for loops.",
-  "main": "lib/index.js",
-  "scripts": {
-    "build": "babel -d ./lib ./src",
-    "prepublish": "babel -d ./lib ./src --minified"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/vihanb/babel-plugin-loop-optimizer.git"
-  },
-  "author": "Vihan B <vihan@vihan.org> (vihan.org)",
-  "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/vihanb/babel-plugin-loop-optimizer/issues"
-  },
-  "homepage": "https://github.com/vihanb/babel-plugin-loop-optimizer#readme",
-  "devDependencies": {
-    "babel": "^6.5.2",
-    "babel-cli": "^6.18.0",
-    "babel-preset-es2015": "^6.18.0"
-  }
+	"name": "babel-plugin-loop-optimizer",
+	"version": "1.4.1",
+	"description": "Optimizes statements such as `forEach` and `map` to for loops.",
+	"main": "lib/index.js",
+	"scripts": {
+		"build": "babel -d ./lib ./src",
+		"prepublish": "babel -d ./lib ./src --minified",
+		"test": "babel --no-babelrc --plugins=./lib/index.js test.ts --out-file test.opt.js"
+	},
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/vihanb/babel-plugin-loop-optimizer.git"
+	},
+	"author": "Vihan B <vihan@vihan.org> (vihan.org)",
+	"license": "MIT",
+	"bugs": {
+		"url": "https://github.com/vihanb/babel-plugin-loop-optimizer/issues"
+	},
+	"homepage": "https://github.com/vihanb/babel-plugin-loop-optimizer#readme",
+	"devDependencies": {
+		"@babel/core": "latest",
+		"@babel/preset-env": "latest",
+		"@babel/preset-typescript": "latest",
+		"@babel/cli": "latest"
+	}
 }
